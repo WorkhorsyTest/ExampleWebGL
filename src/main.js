@@ -16,18 +16,7 @@ let g_vertex_buffer = null;
 let g_texcoord_buffer = null;
 let g_sprites = [];
 
-const DEFAULT_QUAD = new Float32Array([
-	0, 0,
-	0, 1,
-	1, 0,
-	1, 0,
-	0, 1,
-	1, 1,
-]);
 
-function randomNumberBetween(min, max) {
-	return Math.random() * (max - min) + min;
-}
 
 function init() {
 	// Get the canvas
