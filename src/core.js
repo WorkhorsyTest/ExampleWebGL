@@ -5,15 +5,7 @@
 // http://github.com/workhorsy/ExampleWebGL
 
 
-let gl = null;
-let prev_ticks = 0;
-let program = null;
-let g_position_location = null;
-let g_texcoord_location = null;
-let g_matrix_location = null;
-let g_texture_location = null;
-let g_vertex_buffer = null;
-let g_texcoord_buffer = null;
+(function() {
 
 
 const DEFAULT_QUAD = new Float32Array([
@@ -69,3 +61,17 @@ function init() {
 	gl.bindBuffer(gl.ARRAY_BUFFER, g_texcoord_buffer);
 	gl.bufferData(gl.ARRAY_BUFFER, DEFAULT_QUAD.slice(), gl.STATIC_DRAW);
 }
+
+// Figure out if we are running in a Window or Web Worker
+let exports = null;
+if (typeof window === 'object') {
+	exports = window;
+} else if (typeof importScripts === 'function') {
+	exports = self;
+}
+
+// Set exports
+exports.DEFAULT_QUAD = DEFAULT_QUAD;
+exports.randomNumberBetween = randomNumberBetween;
+exports.init = init;
+})();

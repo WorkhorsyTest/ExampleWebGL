@@ -5,6 +5,8 @@
 // http://github.com/workhorsy/ExampleWebGL
 
 
+(function() {
+
 function getShaderSource(gl, element_id) {
 	// Get the script element
 	const element = document.querySelector(element_id);
@@ -71,3 +73,17 @@ function createProgram(gl, element_ids) {
 	}
 	return program;
 }
+
+// Figure out if we are running in a Window or Web Worker
+let exports = null;
+if (typeof window === 'object') {
+	exports = window;
+} else if (typeof importScripts === 'function') {
+	exports = self;
+}
+
+// Set exports
+exports.getShaderSource = getShaderSource;
+exports.compileShader = compileShader;
+exports.createProgram = createProgram;
+})();

@@ -5,6 +5,8 @@
 // http://github.com/workhorsy/ExampleWebGL
 
 
+(function() {
+
 class Texture {
 	constructor(gl_texture, x, y, width, height) {
 		this.gl_texture = gl_texture;
@@ -89,3 +91,15 @@ class Texture {
 		});
 	}
 }
+
+// Figure out if we are running in a Window or Web Worker
+let exports = null;
+if (typeof window === 'object') {
+	exports = window;
+} else if (typeof importScripts === 'function') {
+	exports = self;
+}
+
+// Set exports
+exports.Texture = Texture;
+})();
