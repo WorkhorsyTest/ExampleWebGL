@@ -6,6 +6,7 @@
 
 
 let g_sprites = [];
+let prev_ticks = 0;
 
 function onLogic(ticks) {
 	for (let sprite of g_sprites) {
