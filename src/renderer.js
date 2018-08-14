@@ -67,6 +67,25 @@ class Renderer {
 
 		this.gl = gl;
 	}
+
+	resize() {
+		// Resize the canvas to match the screen size
+		const gl = this.gl;
+		const canvas = gl.canvas;
+		const width = canvas.clientWidth;
+		const height = canvas.clientHeight;
+		if (canvas.width !== width || canvas.height !== height) {
+			canvas.width  = width;
+			canvas.height = height;
+		}
+		gl.viewport(0, 0, width, height);
+	}
+
+	clear() {
+		const gl = this.gl;
+		// Clear the screen
+		gl.clear(gl.COLOR_BUFFER_BIT);
+	}
 }
 
 // Figure out if we are running in a Window or Web Worker

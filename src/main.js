@@ -16,19 +16,8 @@ function onLogic(ticks) {
 }
 
 function onRender() {
-	// Resize the canvas to match the screen size
-	const gl = g_renderer.gl;
-	const canvas = gl.canvas;
-	const width = canvas.clientWidth;
-	const height = canvas.clientHeight;
-	if (canvas.width !== width || canvas.height !== height) {
-		canvas.width  = width;
-		canvas.height = height;
-	}
-	gl.viewport(0, 0, width, height);
-
-	// Clear the screen
-	gl.clear(gl.COLOR_BUFFER_BIT);
+	g_renderer.resize();
+	g_renderer.clear();
 
 	// Render the sprites
 	for (let sprite of g_sprites) {
