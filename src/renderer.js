@@ -86,6 +86,14 @@ class Renderer {
 		// Clear the screen
 		gl.clear(gl.COLOR_BUFFER_BIT);
 	}
+
+	width() {
+		return this.gl.canvas.width;
+	}
+
+	height() {
+		return this.gl.canvas.height;
+	}
 }
 
 // Figure out if we are running in a Window or Web Worker

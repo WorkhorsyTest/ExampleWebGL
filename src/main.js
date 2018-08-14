@@ -37,8 +37,8 @@ function onFrame(curr_ticks) {
 
 class BounceSprite {
 	constructor(texture) {
-		this.x = (texture.renderer.gl.canvas.width / 2) + (texture.width / 2);
-		this.y = (texture.renderer.gl.canvas.height / 2) + (texture.height / 2);
+		this.x = (texture.renderer.width() / 2) + (texture.width / 2);
+		this.y = (texture.renderer.height() / 2) + (texture.height / 2);
 		this.speed_x = randomNumberBetween(-1, 1);
 		this.speed_y = randomNumberBetween(-1, 1);
 		this.texture = texture;
@@ -47,14 +47,14 @@ class BounceSprite {
 
 	logic(ticks) {
 		const seconds = ticks * 0.001;
-		const canvas = this.texture.renderer.gl.canvas;
+		const renderer = this.texture.renderer;
 		this.x += this.speed_x * this.speed * seconds;
 		this.y += this.speed_y * this.speed * seconds;
 
 		if (this.x < -this.texture.width) {
 			this.speed_x = randomNumberBetween(0.1, 1);
 			this.speed = randomNumberBetween(60, 150);
-		} else if (this.x > canvas.width) {
+		} else if (this.x > renderer.width()) {
 			this.speed_x = randomNumberBetween(-0.1, -1);
 			this.speed = randomNumberBetween(60, 150);
 		}
@@ -62,7 +62,7 @@ class BounceSprite {
 		if (this.y < -this.texture.height) {
 			this.speed_y = randomNumberBetween(0.1, 1);
 			this.speed = randomNumberBetween(60, 150);
-		} else if (this.y > canvas.height) {
+		} else if (this.y > renderer.height()) {
 			this.speed_y = - randomNumberBetween(0.1, 1);
 			this.speed = randomNumberBetween(60, 150);
 		}
