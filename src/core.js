@@ -22,11 +22,16 @@ function randomNumberBetween(min, max) {
 }
 
 function init() {
-	// Get the canvas
-	const canvas = document.querySelector("#canvas");
-	if (! canvas) {
-		throw new Error(`Failed to find the canvas.`);
-	}
+	// Create a canvas to use as the screen
+	const canvas = document.createElement('canvas');
+	// Don't blur the screen when resized
+	//canvas.style.imageRendering = '-moz-crisp-edges';
+	canvas.style.imageRendering = 'pixelated';
+	//-ms-interpolation-mode: nearest-neighbor;
+	canvas.style.width = '100vw';
+	canvas.style.height = '100vh';
+	canvas.style.display = 'block';
+	document.body.appendChild(canvas);
 
 	// Get the canvas WebGL context
 	gl = canvas.getContext("webgl");

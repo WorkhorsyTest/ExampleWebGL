@@ -14,16 +14,6 @@
 				overflow: hidden;
 				background-color: black;
 			}
-			canvas {
-				/* Don't blur the screen when resized */
-				image-rendering: -moz-crisp-edges;
-				image-rendering: pixelated;
-				-ms-interpolation-mode: nearest-neighbor;
-
-				width: 100vw;
-				height: 100vh;
-				display: block;
-			}
 		</style>
 	</head>
 	<body>
@@ -52,8 +42,6 @@
 			v_texcoord = a_texcoord;
 		}
 		</script>
-
-		<canvas id="canvas"></canvas>
 
 		<script type="text/javascript" src="src/gl-matrix.js"></script>
 		<script type="text/javascript" src="src/globals.js"></script>
