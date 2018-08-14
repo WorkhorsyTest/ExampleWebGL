@@ -9,32 +9,6 @@ let g_renderer = null;
 let g_sprites = [];
 let prev_ticks = 0;
 
-function onLogic(ticks) {
-	for (let sprite of g_sprites) {
-		sprite.logic(ticks);
-	}
-}
-
-function onRender() {
-	g_renderer.resize();
-	g_renderer.clear();
-
-	// Render the sprites
-	for (let sprite of g_sprites) {
-		sprite.render();
-	}
-}
-
-function onFrame(curr_ticks) {
-	requestAnimationFrame(onFrame);
-
-	const ticks = curr_ticks - prev_ticks;
-	prev_ticks = curr_ticks;
-
-	onLogic(ticks);
-	onRender();
-}
-
 class BounceSprite {
 	constructor(texture) {
 		this.x = (texture.renderer.width() / 2) + (texture.width / 2);
@@ -73,7 +47,31 @@ class BounceSprite {
 	}
 }
 
+function onLogic(ticks) {
+	for (let sprite of g_sprites) {
+		sprite.logic(ticks);
+	}
+}
 
+function onRender() {
+	g_renderer.resize();
+	g_renderer.clear();
+
+	// Render the sprites
+	for (let sprite of g_sprites) {
+		sprite.render();
+	}
+}
+
+function onFrame(curr_ticks) {
+	requestAnimationFrame(onFrame);
+
+	const ticks = curr_ticks - prev_ticks;
+	prev_ticks = curr_ticks;
+
+	onLogic(ticks);
+	onRender();
+}
 
 function main() {
 	g_renderer = new Renderer();
