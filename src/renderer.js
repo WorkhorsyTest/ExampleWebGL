@@ -10,6 +10,14 @@
 class Renderer {
 	constructor() {
 		this.gl = null;
+		this.program = null;
+
+		this._position_location = null;
+		this._texcoord_location = null;
+		this._matrix_location = null;
+		this._texture_location = null;
+		this._vertex_buffer = null;
+		this._texcoord_buffer = null;
 	}
 
 	init() {
@@ -37,24 +45,24 @@ class Renderer {
 		gl.clear(gl.COLOR_BUFFER_BIT);
 
 		// Create the program
-		g_program = createProgram(gl, ["#vertex_shader", "#fragment_shader"]);
+		this.program = createProgram(gl, ["#vertex_shader", "#fragment_shader"]);
 
 		// Get the attributes
-		g_position_location = gl.getAttribLocation(g_program, "a_position");
-		g_texcoord_location = gl.getAttribLocation(g_program, "a_texcoord");
+		this._position_location = gl.getAttribLocation(this.program, "a_position");
+		this._texcoord_location = gl.getAttribLocation(this.program, "a_texcoord");
 
 		// Get the uniforms
-		g_matrix_location = gl.getUniformLocation(g_program, "u_matrix");
-		g_texture_location = gl.getUniformLocation(g_program, "u_texture");
+		this._matrix_location = gl.getUniformLocation(this.program, "u_matrix");
+		this._texture_location = gl.getUniformLocation(this.program, "u_texture");
 
 		// Create a vertex buffer that contains a quad
-		g_vertex_buffer = gl.createBuffer();
-		gl.bindBuffer(gl.ARRAY_BUFFER, g_vertex_buffer);
+		this._vertex_buffer = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, this._vertex_buffer);
 		gl.bufferData(gl.ARRAY_BUFFER, DEFAULT_QUAD.slice(), gl.STATIC_DRAW);
 
 		// Create a texture buffer that contains a quad
-		g_texcoord_buffer = gl.createBuffer();
-		gl.bindBuffer(gl.ARRAY_BUFFER, g_texcoord_buffer);
+		this._texcoord_buffer = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, this._texcoord_buffer);
 		gl.bufferData(gl.ARRAY_BUFFER, DEFAULT_QUAD.slice(), gl.STATIC_DRAW);
 
 		this.gl = gl;

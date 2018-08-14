@@ -24,18 +24,18 @@ class Texture {
 		const height = this.height;
 
 		// Use the program on the texture
-		gl.useProgram(g_program);
+		gl.useProgram(this.renderer.program);
 		gl.bindTexture(gl.TEXTURE_2D, gl_texture);
 
 		// Set the vertex attributes
-		gl.bindBuffer(gl.ARRAY_BUFFER, g_vertex_buffer);
-		gl.enableVertexAttribArray(g_position_location);
-		gl.vertexAttribPointer(g_position_location, 2, gl.FLOAT, false, 0, 0);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.renderer._vertex_buffer);
+		gl.enableVertexAttribArray(this.renderer._position_location);
+		gl.vertexAttribPointer(this.renderer._position_location, 2, gl.FLOAT, false, 0, 0);
 
 		// Set the texture attributes
-		gl.bindBuffer(gl.ARRAY_BUFFER, g_texcoord_buffer);
-		gl.enableVertexAttribArray(g_texcoord_location);
-		gl.vertexAttribPointer(g_texcoord_location, 2, gl.FLOAT, false, 0, 0);
+		gl.bindBuffer(gl.ARRAY_BUFFER, this.renderer._texcoord_buffer);
+		gl.enableVertexAttribArray(this.renderer._texcoord_location);
+		gl.vertexAttribPointer(this.renderer._texcoord_location, 2, gl.FLOAT, false, 0, 0);
 
 		// Use a matrix with an orthographic camera
 		const buffer = new Float32Array(16);
@@ -46,8 +46,8 @@ class Texture {
 		matrix = mat4.scale(buffer, matrix, [width, height, 1]);
 
 		// Set the uniforms for matrix and first texture
-		gl.uniformMatrix4fv(g_matrix_location, false, matrix);
-		gl.uniform1i(g_texture_location, 0);
+		gl.uniformMatrix4fv(this.renderer._matrix_location, false, matrix);
+		gl.uniform1i(this.renderer._texture_location, 0);
 
 		// Render as a quad
 		gl.drawArrays(gl.TRIANGLES, 0, 6);

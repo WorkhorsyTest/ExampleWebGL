@@ -4,6 +4,7 @@
 // Licensed under a MIT style license
 // http://github.com/workhorsy/ExampleWebGL
 
+
 let g_renderer = null;
 let g_sprites = [];
 let prev_ticks = 0;
