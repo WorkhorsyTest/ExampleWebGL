@@ -46,15 +46,15 @@ function init() {
 	gl.clear(gl.COLOR_BUFFER_BIT);
 
 	// Create the program
-	program = createProgram(gl, ["#vertex_shader", "#fragment_shader"]);
+	g_program = createProgram(gl, ["#vertex_shader", "#fragment_shader"]);
 
 	// Get the attributes
-	g_position_location = gl.getAttribLocation(program, "a_position");
-	g_texcoord_location = gl.getAttribLocation(program, "a_texcoord");
+	g_position_location = gl.getAttribLocation(g_program, "a_position");
+	g_texcoord_location = gl.getAttribLocation(g_program, "a_texcoord");
 
 	// Get the uniforms
-	g_matrix_location = gl.getUniformLocation(program, "u_matrix");
-	g_texture_location = gl.getUniformLocation(program, "u_texture");
+	g_matrix_location = gl.getUniformLocation(g_program, "u_matrix");
+	g_texture_location = gl.getUniformLocation(g_program, "u_texture");
 
 	// Create a vertex buffer that contains a quad
 	g_vertex_buffer = gl.createBuffer();

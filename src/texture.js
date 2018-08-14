@@ -22,7 +22,7 @@ class Texture {
 		const height = this.height;
 
 		// Use the program on the texture
-		gl.useProgram(program);
+		gl.useProgram(g_program);
 		gl.bindTexture(gl.TEXTURE_2D, gl_texture);
 
 		// Set the vertex attributes
