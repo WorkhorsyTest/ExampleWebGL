@@ -83,7 +83,8 @@ if (typeof window === 'object') {
 }
 
 // Set exports
-exports.getShaderSource = getShaderSource;
-exports.compileShader = compileShader;
-exports.createProgram = createProgram;
+if (typeof exports.YEE === "undefined") exports.YEE = {};
+exports.YEE.getShaderSource = getShaderSource;
+exports.YEE.compileShader = compileShader;
+exports.YEE.createProgram = createProgram;
 })();

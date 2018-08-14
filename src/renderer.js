@@ -45,7 +45,7 @@ class Renderer {
 		gl.clear(gl.COLOR_BUFFER_BIT);
 
 		// Create the program
-		this.program = createProgram(gl, ["#vertex_shader", "#fragment_shader"]);
+		this.program = YEE.createProgram(gl, ["#vertex_shader", "#fragment_shader"]);
 
 		// Get the attributes
 		this._position_location = gl.getAttribLocation(this.program, "a_position");
@@ -58,12 +58,12 @@ class Renderer {
 		// Create a vertex buffer that contains a quad
 		this._vertex_buffer = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, this._vertex_buffer);
-		gl.bufferData(gl.ARRAY_BUFFER, DEFAULT_QUAD.slice(), gl.STATIC_DRAW);
+		gl.bufferData(gl.ARRAY_BUFFER, YEE.DEFAULT_QUAD.slice(), gl.STATIC_DRAW);
 
 		// Create a texture buffer that contains a quad
 		this._texcoord_buffer = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, this._texcoord_buffer);
-		gl.bufferData(gl.ARRAY_BUFFER, DEFAULT_QUAD.slice(), gl.STATIC_DRAW);
+		gl.bufferData(gl.ARRAY_BUFFER, YEE.DEFAULT_QUAD.slice(), gl.STATIC_DRAW);
 
 		this.gl = gl;
 	}
@@ -105,5 +105,6 @@ if (typeof window === 'object') {
 }
 
 // Set exports
-exports.Renderer = Renderer;
+if (typeof exports.YEE === "undefined") exports.YEE = {};
+exports.YEE.Renderer = Renderer;
 })();

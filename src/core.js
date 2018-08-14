@@ -30,6 +30,7 @@ if (typeof window === 'object') {
 }
 
 // Set exports
-exports.DEFAULT_QUAD = DEFAULT_QUAD;
-exports.randomNumberBetween = randomNumberBetween;
+if (typeof exports.YEE === "undefined") exports.YEE = {};
+exports.YEE.DEFAULT_QUAD = DEFAULT_QUAD;
+exports.YEE.randomNumberBetween = randomNumberBetween;
 })();

@@ -5,6 +5,8 @@
 // http://github.com/workhorsy/ExampleWebGL
 
 
+(function() {
+
 class Timer {
 	constructor() {
 		this._delta_ticks = 0;
@@ -32,3 +34,16 @@ class Timer {
 		return this._delta_ticks * 0.001;
 	}
 }
+
+// Figure out if we are running in a Window or Web Worker
+let exports = null;
+if (typeof window === 'object') {
+	exports = window;
+} else if (typeof importScripts === 'function') {
+	exports = self;
+}
+
+// Set exports
+if (typeof exports.YEE === "undefined") exports.YEE = {};
+exports.YEE.Timer = Timer;
+})();

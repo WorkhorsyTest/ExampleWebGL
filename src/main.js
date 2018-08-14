@@ -14,10 +14,10 @@ class BounceSprite {
 	constructor(texture) {
 		this.x = (texture.renderer.width() / 2) + (texture.width / 2);
 		this.y = (texture.renderer.height() / 2) + (texture.height / 2);
-		this.speed_x = randomNumberBetween(-1, 1);
-		this.speed_y = randomNumberBetween(-1, 1);
+		this.speed_x = YEE.randomNumberBetween(-1, 1);
+		this.speed_y = YEE.randomNumberBetween(-1, 1);
 		this.texture = texture;
-		this.speed = randomNumberBetween(60, 150);
+		this.speed = YEE.randomNumberBetween(60, 150);
 	}
 
 	logic() {
@@ -27,19 +27,19 @@ class BounceSprite {
 		this.y += this.speed_y * this.speed * seconds;
 
 		if (this.x < -this.texture.width) {
-			this.speed_x = randomNumberBetween(0.1, 1);
-			this.speed = randomNumberBetween(60, 150);
+			this.speed_x = YEE.randomNumberBetween(0.1, 1);
+			this.speed = YEE.randomNumberBetween(60, 150);
 		} else if (this.x > renderer.width()) {
-			this.speed_x = randomNumberBetween(-0.1, -1);
-			this.speed = randomNumberBetween(60, 150);
+			this.speed_x = YEE.randomNumberBetween(-0.1, -1);
+			this.speed = YEE.randomNumberBetween(60, 150);
 		}
 
 		if (this.y < -this.texture.height) {
-			this.speed_y = randomNumberBetween(0.1, 1);
-			this.speed = randomNumberBetween(60, 150);
+			this.speed_y = YEE.randomNumberBetween(0.1, 1);
+			this.speed = YEE.randomNumberBetween(60, 150);
 		} else if (this.y > renderer.height()) {
-			this.speed_y = - randomNumberBetween(0.1, 1);
-			this.speed = randomNumberBetween(60, 150);
+			this.speed_y = - YEE.randomNumberBetween(0.1, 1);
+			this.speed = YEE.randomNumberBetween(60, 150);
 		}
 	}
 
@@ -74,14 +74,14 @@ function onFrame(curr_ticks) {
 }
 
 function main() {
-	g_timer = new Timer();
-	g_renderer = new Renderer();
+	g_timer = new YEE.Timer();
+	g_renderer = new YEE.Renderer();
 	g_renderer.init();
 
 	const texture_promises = [
-		Texture.load(g_renderer, 'test.png'),
-		Texture.load(g_renderer, 'test2.png'),
-		Texture.load(g_renderer, 'test3.png'),
+		YEE.Texture.load(g_renderer, 'test.png'),
+		YEE.Texture.load(g_renderer, 'test2.png'),
+		YEE.Texture.load(g_renderer, 'test3.png'),
 	];
 
 	Promise.all(texture_promises).then(textures => {

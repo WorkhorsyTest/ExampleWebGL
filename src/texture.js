@@ -104,5 +104,6 @@ if (typeof window === 'object') {
 }
 
 // Set exports
-exports.Texture = Texture;
+if (typeof exports.YEE === "undefined") exports.YEE = {};
+exports.YEE.Texture = Texture;
 })();
