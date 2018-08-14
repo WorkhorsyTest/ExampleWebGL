@@ -6,7 +6,7 @@
 
 
 // FIXME: Move these into modules
-let gl = null;
+
 let g_program = null;
 let g_position_location = null;
 let g_texcoord_location = null;

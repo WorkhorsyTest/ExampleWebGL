@@ -4,7 +4,7 @@
 // Licensed under a MIT style license
 // http://github.com/workhorsy/ExampleWebGL
 
-
+let g_renderer = null;
 let g_sprites = [];
 let prev_ticks = 0;
 
@@ -16,6 +16,7 @@ function onLogic(ticks) {
 
 function onRender() {
 	// Resize the canvas to match the screen size
+	const gl = g_renderer.gl;
 	const canvas = gl.canvas;
 	const width = canvas.clientWidth;
 	const height = canvas.clientHeight;
@@ -46,8 +47,8 @@ function onFrame(curr_ticks) {
 
 class BounceSprite {
 	constructor(texture) {
-		this.x = (gl.canvas.width / 2) + (texture.width / 2);
-		this.y = (gl.canvas.height / 2) + (texture.height / 2);
+		this.x = (texture.renderer.gl.canvas.width / 2) + (texture.width / 2);
+		this.y = (texture.renderer.gl.canvas.height / 2) + (texture.height / 2);
 		this.speed_x = randomNumberBetween(-1, 1);
 		this.speed_y = randomNumberBetween(-1, 1);
 		this.texture = texture;
@@ -56,13 +57,14 @@ class BounceSprite {
 
 	logic(ticks) {
 		const seconds = ticks * 0.001;
+		const canvas = this.texture.renderer.gl.canvas;
 		this.x += this.speed_x * this.speed * seconds;
 		this.y += this.speed_y * this.speed * seconds;
 
 		if (this.x < -this.texture.width) {
 			this.speed_x = randomNumberBetween(0.1, 1);
 			this.speed = randomNumberBetween(60, 150);
-		} else if (this.x > gl.canvas.width) {
+		} else if (this.x > canvas.width) {
 			this.speed_x = randomNumberBetween(-0.1, -1);
 			this.speed = randomNumberBetween(60, 150);
 		}
@@ -70,7 +72,7 @@ class BounceSprite {
 		if (this.y < -this.texture.height) {
 			this.speed_y = randomNumberBetween(0.1, 1);
 			this.speed = randomNumberBetween(60, 150);
-		} else if (this.y > gl.canvas.height) {
+		} else if (this.y > canvas.height) {
 			this.speed_y = - randomNumberBetween(0.1, 1);
 			this.speed = randomNumberBetween(60, 150);
 		}
@@ -81,13 +83,16 @@ class BounceSprite {
 	}
 }
 
+
+
 function main() {
-	init();
+	g_renderer = new Renderer();
+	g_renderer.init();
 
 	const texture_promises = [
-		Texture.load(gl, 'test.png'),
-		Texture.load(gl, 'test2.png'),
-		Texture.load(gl, 'test3.png'),
+		Texture.load(g_renderer, 'test.png'),
+		Texture.load(g_renderer, 'test2.png'),
+		Texture.load(g_renderer, 'test3.png'),
 	];
 
 	Promise.all(texture_promises).then(textures => {

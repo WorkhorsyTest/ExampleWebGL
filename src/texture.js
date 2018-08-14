@@ -8,7 +8,8 @@
 (function() {
 
 class Texture {
-	constructor(gl_texture, x, y, width, height) {
+	constructor(renderer, gl_texture, x, y, width, height) {
+		this.renderer = renderer;
 		this.gl_texture = gl_texture;
 		this.x = x;
 		this.y = y;
@@ -17,6 +18,7 @@ class Texture {
 	}
 
 	render(x, y) {
+		const gl = this.renderer.gl;
 		const gl_texture  = this.gl_texture;
 		const width = this.width;
 		const height = this.height;
@@ -51,8 +53,9 @@ class Texture {
 		gl.drawArrays(gl.TRIANGLES, 0, 6);
 	}
 
-	static load(gl, url) {
+	static load(renderer, url) {
 		return new Promise((resolve, reject) => {
+			const gl = renderer.gl;
 			// Create texture
 			const gl_texture = gl.createTexture();
 			gl.bindTexture(gl.TEXTURE_2D, gl_texture);
@@ -81,7 +84,7 @@ class Texture {
 				gl.bindTexture(gl.TEXTURE_2D, gl_texture);
 				gl.texImage2D(gl.TEXTURE_2D, level, internal_format, src_format, src_type, image);
 
-				const texture = new Texture(gl_texture, 1.0, 1.0, image.width, image.height);
+				const texture = new Texture(renderer, gl_texture, 1.0, 1.0, image.width, image.height);
 				resolve(texture);
 			});
 			image.addEventListener('error', function() {

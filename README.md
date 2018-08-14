@@ -17,4 +17,4 @@ py -2 -u -m SimpleHTTPServer 9991
 * Read tutorials again: https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial
 * Move pixel shaders to their own files, or at lease not inline in the html
 * Make each sprite use a different texture offset, but the same texture
-* Add timer, camera, renderer, and lighting
+* Add timer, camera, and lighting
