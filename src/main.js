@@ -78,6 +78,13 @@ function main() {
 	g_renderer = new YEE.Renderer();
 	g_renderer.init();
 
+	// Reset the timer when the app wakes from sleep
+	document.addEventListener('visibilitychange', () => {
+		if (! document.hidden) {
+			g_timer._was_asleep = true;
+		}
+	});
+
 	const texture_promises = [
 		YEE.Texture.load(g_renderer, 'test.png'),
 		YEE.Texture.load(g_renderer, 'test2.png'),

@@ -11,9 +11,17 @@ class Timer {
 	constructor() {
 		this._delta_ticks = 0;
 		this._ticks = 0;
+		this._was_asleep = false;
 	}
 
 	update(curr_ticks) {
+		// Reset the timer if it was asleep
+		if (this._was_asleep) {
+			this._delta_ticks = 0;
+			this._ticks = curr_ticks;
+			this._was_asleep = false;
+		}
+
 		this._delta_ticks = curr_ticks - this._ticks;
 		this._ticks = curr_ticks;
 	}
