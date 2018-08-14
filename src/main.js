@@ -7,7 +7,8 @@
 
 let g_renderer = null;
 let g_sprites = [];
-let prev_ticks = 0;
+let g_timer = null;
+
 
 class BounceSprite {
 	constructor(texture) {
@@ -19,8 +20,8 @@ class BounceSprite {
 		this.speed = randomNumberBetween(60, 150);
 	}
 
-	logic(ticks) {
-		const seconds = ticks * 0.001;
+	logic() {
+		const seconds = g_timer.deltaSeconds();
 		const renderer = this.texture.renderer;
 		this.x += this.speed_x * this.speed * seconds;
 		this.y += this.speed_y * this.speed * seconds;
@@ -47,9 +48,9 @@ class BounceSprite {
 	}
 }
 
-function onLogic(ticks) {
+function onLogic() {
 	for (let sprite of g_sprites) {
-		sprite.logic(ticks);
+		sprite.logic();
 	}
 }
 
@@ -66,14 +67,14 @@ function onRender() {
 function onFrame(curr_ticks) {
 	requestAnimationFrame(onFrame);
 
-	const ticks = curr_ticks - prev_ticks;
-	prev_ticks = curr_ticks;
+	g_timer.update(curr_ticks);
 
-	onLogic(ticks);
+	onLogic();
 	onRender();
 }
 
 function main() {
+	g_timer = new Timer();
 	g_renderer = new Renderer();
 	g_renderer.init();
 
