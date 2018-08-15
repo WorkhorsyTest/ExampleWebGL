@@ -42,7 +42,7 @@ class Renderer {
 		gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
 		// Clear the screen
-		gl.clear(gl.COLOR_BUFFER_BIT);
+		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
 		// Create the program
 		this.program = YEE.createProgram(gl, ["#vertex_shader", "#fragment_shader"]);
@@ -83,8 +83,14 @@ class Renderer {
 
 	clear() {
 		const gl = this.gl;
+
 		// Clear the screen
-		gl.clear(gl.COLOR_BUFFER_BIT);
+		gl.clearColor(0.0, 0.0, 0.0, 1.0);
+		gl.clearDepth(1.0);
+		gl.enable(gl.DEPTH_TEST);
+		gl.depthFunc(gl.LEQUAL);
+
+		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 	}
 
 	width() {
