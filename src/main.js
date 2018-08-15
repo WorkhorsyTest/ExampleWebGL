@@ -14,6 +14,7 @@ class BounceSprite {
 	constructor(texture) {
 		this.x = (texture.renderer.width() / 2) + (texture.width / 2);
 		this.y = (texture.renderer.height() / 2) + (texture.height / 2);
+		this.rotation = 0;
 		this.speed_x = YEE.randomNumberBetween(-1, 1);
 		this.speed_y = YEE.randomNumberBetween(-1, 1);
 		this.texture = texture;
@@ -23,6 +24,7 @@ class BounceSprite {
 	logic() {
 		const seconds = g_timer.deltaSeconds();
 		const renderer = this.texture.renderer;
+		this.rotation += g_timer.deltaSeconds();
 		this.x += this.speed_x * this.speed * seconds;
 		this.y += this.speed_y * this.speed * seconds;
 
@@ -44,7 +46,7 @@ class BounceSprite {
 	}
 
 	render() {
-		this.texture.render(this.x, this.y);
+		this.texture.render(this.x, this.y, this.rotation);
 	}
 }
 

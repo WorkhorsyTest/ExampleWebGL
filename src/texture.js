@@ -17,7 +17,7 @@ class Texture {
 		this.height = height;
 	}
 
-	render(x, y) {
+	render(x, y, rotation) {
 		const gl = this.renderer.gl;
 		const gl_texture  = this.gl_texture;
 		const width = this.width;
@@ -41,8 +41,10 @@ class Texture {
 		const buffer = new Float32Array(16);
 		let matrix = mat4.ortho(buffer, 0, gl.canvas.width, gl.canvas.height, 0, -1, 1);
 
-		// Position and scale the matrix
+		// Position, rotate, and scale the matrix
 		matrix = mat4.translate(buffer, matrix, [x, y, 0]);
+		const axis = [0, 0, 1];
+		matrix = mat4.rotate(buffer, matrix, rotation, axis);
 		matrix = mat4.scale(buffer, matrix, [width, height, 1]);
 
 		// Set the uniforms for matrix and first texture
