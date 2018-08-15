@@ -8,11 +8,9 @@
 (function() {
 
 class Texture {
-	constructor(renderer, gl_texture, x, y, width, height) {
+	constructor(renderer, gl_texture, width, height) {
 		this.renderer = renderer;
 		this.gl_texture = gl_texture;
-		this.x = x;
-		this.y = y;
 		this.width = width;
 		this.height = height;
 	}
@@ -86,7 +84,7 @@ class Texture {
 				gl.bindTexture(gl.TEXTURE_2D, gl_texture);
 				gl.texImage2D(gl.TEXTURE_2D, level, internal_format, src_format, src_type, image);
 
-				const texture = new Texture(renderer, gl_texture, 1.0, 1.0, image.width, image.height);
+				const texture = new Texture(renderer, gl_texture, image.width, image.height);
 				resolve(texture);
 			});
 			image.addEventListener('error', function() {
